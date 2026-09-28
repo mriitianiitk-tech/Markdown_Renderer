@@ -2,9 +2,19 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Antigravity Artifact Viewer & AI Annotation Tool</title>
   <meta name="description" content="Beautiful markdown & artifact reader with inline AI comments, alerts, carousels, mermaid diagrams, and token-saving AI prompt exporter.">
+  
+  <!-- PWA & Mobile Web App Meta -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0a0d12" id="meta-theme-color">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Artifact AI">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -159,46 +169,52 @@
       -webkit-backdrop-filter: blur(12px);
       background-color: var(--bg-card);
       border-bottom: 1px solid var(--border-subtle);
-      height: 60px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 16px;
+      padding-top: env(safe-area-inset-top);
+      padding-left: max(14px, env(safe-area-inset-left));
+      padding-right: max(14px, env(safe-area-inset-right));
       transition: border-color 0.25s ease;
     }
 
     .brand-section {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       cursor: pointer;
+      user-select: none;
     }
 
     .brand-badge {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 34px;
-      height: 34px;
+      width: 30px;
+      height: 30px;
       border-radius: var(--radius-md);
       background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
       color: #0b0f17;
       font-weight: 700;
       box-shadow: 0 2px 8px var(--accent-glow);
+      flex-shrink: 0;
     }
 
     .brand-title {
       font-family: var(--font-heading);
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       display: flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
 
     .brand-title span.sub {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--accent);
       background: var(--note-bg);
       padding: 2px 7px;
@@ -208,10 +224,35 @@
       letter-spacing: normal;
     }
 
-    .header-actions {
+    .desktop-nav-actions {
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mobile-header-actions {
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+
+    @media (min-width: 769px) {
+      header.app-header {
+        height: 60px;
+      }
+      .brand-title {
+        font-size: 1.05rem;
+      }
+      .brand-badge {
+        width: 34px;
+        height: 34px;
+      }
+      .desktop-nav-actions {
+        display: flex;
+      }
+      .mobile-header-actions {
+        display: none;
+      }
     }
 
     @media (max-width: 768px) {
@@ -1014,50 +1055,111 @@
       color: #f87171;
     }
 
-    /* Comment Composer Box */
-    .comment-composer {
-      padding: 16px;
-      border-top: 1px solid var(--border-subtle);
+    /* Quick Comment Composer (Compact Bottom Sheet / Modal) */
+    .quick-composer-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
       background: var(--bg-surface);
+      border-top: 1px solid var(--border-strong);
+      border-radius: 20px 20px 0 0;
+      padding: 14px 18px 16px 18px;
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.45);
+      z-index: 110;
+      transform: translateY(120%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    .composer-quote-preview {
+    @media (min-width: 768px) {
+      .quick-composer-sheet {
+        bottom: 24px;
+        right: 24px;
+        left: auto;
+        width: 420px;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-strong);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(20px) scale(0.96);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .quick-composer-sheet.open {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .quick-composer-sheet.open {
+        transform: translateY(0);
+      }
+    }
+
+    .quick-composer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .quick-composer-quote {
       font-size: 0.78rem;
       color: var(--text-muted);
       border-left: 2px solid var(--highlight-border);
-      padding: 4px 8px;
+      padding: 3px 8px;
       background: rgba(250, 204, 21, 0.08);
-      margin-bottom: 8px;
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      margin-bottom: 8px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      font-style: italic;
     }
 
-    .composer-textarea {
+    .quick-composer-textarea {
       width: 100%;
-      min-height: 70px;
+      height: 66px;
       background: var(--bg-surface-elevated);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 10px;
+      padding: 9px 12px;
       color: var(--text-main);
       font-family: var(--font-sans);
       font-size: 0.88rem;
-      resize: vertical;
+      resize: none;
       outline: none;
+      box-sizing: border-box;
     }
 
-    .composer-textarea:focus {
+    .quick-composer-textarea:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 2px var(--accent-glow);
     }
 
-    .composer-footer {
+    .quick-composer-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .sidebar-footer-actions {
+      padding: 14px 18px;
+      border-top: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 8px;
+      font-size: 0.8rem;
     }
 
     /* Backdrop */
@@ -1208,22 +1310,75 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 60px;
+      height: calc(56px + env(safe-area-inset-bottom));
+      padding-bottom: env(safe-area-inset-bottom);
       background: var(--bg-card);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-top: 1px solid var(--border-subtle);
       display: flex;
       align-items: center;
       justify-content: space-around;
       z-index: 35;
-      padding: 0 10px;
+      padding-left: 10px;
+      padding-right: 10px;
     }
 
-    @media (min-width: 992px) {
+    @media (min-width: 769px) {
       .mobile-nav-bar {
-        display: none;
+        display: none !important;
       }
+    }
+
+    /* Mobile More Options Modal / Sheet */
+    .mobile-menu-modal {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-strong);
+      border-radius: 20px 20px 0 0;
+      padding: 16px 20px calc(20px + env(safe-area-inset-bottom)) 20px;
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.45);
+      z-index: 120;
+      transform: translateY(120%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .mobile-menu-modal.open {
+      transform: translateY(0);
+    }
+
+    .mobile-menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .mobile-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-md);
+      background: var(--bg-surface-elevated);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .mobile-menu-item:hover,
+    .mobile-menu-item:active {
+      background: var(--bg-hover);
+      border-color: var(--accent);
     }
 
     .mobile-nav-btn {
@@ -1303,14 +1458,21 @@
       </div>
     </div>
 
-    <div class="header-actions">
+    <!-- Desktop Navigation Actions (Visible on Laptop / Desktop screens) -->
+    <div class="desktop-nav-actions">
+      <!-- Install PWA Button (Desktop) -->
+      <button class="btn" id="btn-install-app" style="display: none;" title="Install Artifact AI as Desktop App">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        <span>Install App</span>
+      </button>
+
       <!-- File Open Button -->
       <button class="btn" id="btn-open-file" title="Open Markdown File (.md)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
           <path d="M6 2v20"/>
         </svg>
-        <span class="desktop-only">Open MD</span>
+        <span>Open MD</span>
       </button>
       <input type="file" id="file-input" accept=".md,.markdown,.txt" style="display: none;">
 
@@ -1320,7 +1482,7 @@
           <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
         </svg>
-        <span class="desktop-only">Paste / Edit</span>
+        <span>Paste / Edit</span>
       </button>
 
       <!-- Export AI Prompt / Token-Saver -->
@@ -1338,13 +1500,13 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
-        <span class="desktop-only">Comments</span>
+        <span>Comments</span>
         <span class="btn-badge" id="header-comment-count">0</span>
       </button>
 
-      <!-- Light/Dark Mode Switcher -->
-      <button class="btn btn-icon" id="btn-theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
-        <svg id="icon-theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Light/Dark Mode Switcher (Desktop) -->
+      <button class="btn btn-icon btn-theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+        <svg class="icon-theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="12" cy="12" r="5"/>
           <line x1="12" y1="1" x2="12" y2="3"/>
           <line x1="12" y1="21" x2="12" y2="23"/>
@@ -1355,9 +1517,40 @@
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
         </svg>
-        <svg id="icon-theme-moon" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <svg class="icon-theme-moon" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Header Actions (Clean, uncluttered, smartphone-optimized) -->
+    <div class="mobile-header-actions">
+      <!-- Install PWA Button (Mobile) -->
+      <button class="btn btn-icon" id="btn-install-app-mobile" style="display: none;" title="Install App to Home Screen">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      </button>
+
+      <!-- Light/Dark Mode Switcher (Mobile) -->
+      <button class="btn btn-icon btn-theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+        <svg class="icon-theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-theme-moon" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <!-- More Options (⋮) Button (Mobile) -->
+      <button class="btn btn-icon" id="btn-mobile-more-menu" title="More Options">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="1.5"></circle><circle cx="12" cy="5" r="1.5"></circle><circle cx="12" cy="19" r="1.5"></circle></svg>
       </button>
     </div>
   </header>
@@ -1428,22 +1621,38 @@
         <!-- Rendered comments appear here -->
       </div>
 
-      <!-- New Comment Composer Box -->
-      <div class="comment-composer">
-        <div class="composer-quote-preview" id="composer-quote-preview">
-          <em>Select text in the document first to comment...</em>
-        </div>
-        <textarea class="composer-textarea" id="composer-input" placeholder="Type your comment, prompt instruction, or feedback here..."></textarea>
-        <div class="composer-footer">
-          <span style="font-size:0.75rem; color:var(--text-subtle);">Press Add or Ctrl+Enter</span>
-          <button class="btn btn-primary" id="btn-submit-comment" disabled>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            Add Comment
-          </button>
-        </div>
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer-actions">
+        <span style="color:var(--text-subtle); font-size:0.75rem;">Select text in doc to comment</span>
+        <button class="btn btn-primary" id="btn-sidebar-add-note">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          + Add Note
+        </button>
       </div>
     </aside>
   </main>
+
+  <!-- Dedicated Compact Comment Sheet (Only opens when adding a comment) -->
+  <div class="quick-composer-sheet" id="quick-composer-sheet">
+    <div class="quick-composer-header">
+      <div style="display:flex; align-items:center; gap:6px;">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span>Add Annotation</span>
+      </div>
+      <button class="btn btn-icon" id="btn-close-quick-composer" style="width:28px; height:28px;" title="Dismiss">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="quick-composer-quote" id="quick-quote-preview">“Selected text quote...”</div>
+    <textarea class="quick-composer-textarea" id="quick-composer-input" placeholder="Type your comment, feedback, or AI prompt instruction..."></textarea>
+    <div class="quick-composer-footer">
+      <button class="btn" id="btn-cancel-quick-composer">Cancel</button>
+      <button class="btn btn-primary" id="btn-save-quick-comment">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        Save Comment
+      </button>
+    </div>
+  </div>
 
   <!-- Mobile Bottom Quick Navigation -->
   <nav class="mobile-nav-bar">
@@ -1464,6 +1673,30 @@
       <span>Export</span>
     </button>
   </nav>
+
+  <!-- Mobile More Menu Sheet -->
+  <div class="mobile-menu-modal" id="mobile-more-menu-modal">
+    <div class="quick-composer-header" style="margin-bottom:14px;">
+      <span style="font-size:0.95rem;">Options & Tools</span>
+      <button class="btn btn-icon" id="btn-close-mobile-menu" style="width:28px; height:28px;" title="Dismiss">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="mobile-menu-list">
+      <div class="mobile-menu-item" id="m-menu-paste-edit">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+        <span>Paste / Edit Markdown</span>
+      </div>
+      <div class="mobile-menu-item" id="m-menu-load-sample">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 2v20"></path></svg>
+        <span>Load Antigravity Sample</span>
+      </div>
+      <div class="mobile-menu-item" id="m-menu-install" style="display:none;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        <span>Install App (Offline PWA)</span>
+      </div>
+    </div>
+  </div>
 
   <!-- Floating Text Selection Tooltip Button -->
   <div id="selection-comment-tooltip">
@@ -2007,34 +2240,61 @@ graph TD
       }
     }
 
-    // Floating Tooltip Button Click
+    // Quick Composer Sheet Elements
+    const quickComposerSheet = document.getElementById('quick-composer-sheet');
+    const quickQuotePreview = document.getElementById('quick-quote-preview');
+    const quickComposerInput = document.getElementById('quick-composer-input');
+    const btnSaveQuickComment = document.getElementById('btn-save-quick-comment');
+    const btnCancelQuickComposer = document.getElementById('btn-cancel-quick-composer');
+    const btnCloseQuickComposer = document.getElementById('btn-close-quick-composer');
+    const btnSidebarAddNote = document.getElementById('btn-sidebar-add-note');
+
+    // Floating Tooltip Button Click: Opens ONLY the compact composer
     document.getElementById('btn-tooltip-add-comment').onclick = () => {
       selectionTooltip.style.display = 'none';
-      openCommentComposer(state.selectedQuote);
+      openQuickComposer(state.selectedQuote);
     };
 
-    function openCommentComposer(quoteText) {
-      state.selectedQuote = quoteText;
-      composerQuotePreview.innerHTML = `<strong>Quote:</strong> "${escapeHtml(quoteText)}"`;
-      btnSubmitComment.removeAttribute('disabled');
-      openCommentsSidebar();
+    function openQuickComposer(quoteText) {
+      state.selectedQuote = quoteText || '';
+      quickQuotePreview.textContent = quoteText ? `“${quoteText}”` : 'General Document Note';
+      quickComposerInput.value = '';
+      quickComposerSheet.classList.add('open');
+      backdrop.classList.add('active');
       setTimeout(() => {
-        composerInput.focus();
+        quickComposerInput.focus();
       }, 150);
     }
 
-    // Submit new comment
-    btnSubmitComment.onclick = addComment;
-    composerInput.addEventListener('keydown', (e) => {
+    function closeQuickComposer() {
+      quickComposerSheet.classList.remove('open');
+      if (!commentsSidebar.classList.contains('open') && !document.querySelector('.modal.active')) {
+        backdrop.classList.remove('active');
+      }
+    }
+
+    btnCloseQuickComposer.onclick = closeQuickComposer;
+    btnCancelQuickComposer.onclick = closeQuickComposer;
+
+    if (btnSidebarAddNote) {
+      btnSidebarAddNote.onclick = () => {
+        closeCommentsSidebar();
+        openQuickComposer(state.selectedQuote || '');
+      };
+    }
+
+    // Submit new comment from quick composer
+    btnSaveQuickComment.onclick = addQuickComment;
+    quickComposerInput.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-        addComment();
+        addQuickComment();
       }
     });
 
-    function addComment() {
-      const text = composerInput.value.trim();
+    function addQuickComment() {
+      const text = quickComposerInput.value.trim();
       if (!text) {
-        showToast('Please type a comment before submitting.');
+        showToast('Please type a comment before saving.');
         return;
       }
 
@@ -2073,14 +2333,10 @@ graph TD
       state.comments.push(newComment);
       saveCommentsToStorage();
 
-      composerInput.value = '';
-      state.selectedQuote = '';
-      composerQuotePreview.innerHTML = `<em>Select text in the document first to comment...</em>`;
-      btnSubmitComment.setAttribute('disabled', 'true');
-
+      closeQuickComposer();
       renderCommentsList();
       applyHighlightsToDocument();
-      showToast('Comment added & highlighted');
+      showToast(`Comment #${state.comments.length} added & highlighted`);
     }
 
     // Render comments list
@@ -2382,10 +2638,8 @@ graph TD
     document.getElementById('btn-close-mobile-toc').onclick = () => closeModal('mobile-toc-modal');
 
     // Theme Management (Light & Dark Mode)
-    const btnThemeToggle = document.getElementById('btn-theme-toggle');
-    const iconSun = document.getElementById('icon-theme-sun');
-    const iconMoon = document.getElementById('icon-theme-moon');
     const hljsTheme = document.getElementById('hljs-theme');
+    const metaThemeColor = document.getElementById('meta-theme-color');
 
     function applyTheme(theme) {
       state.theme = theme;
@@ -2394,23 +2648,119 @@ graph TD
         localStorage.setItem('antigravity_theme', theme);
       } catch (e) {}
 
-      if (theme === 'dark') {
-        iconSun.style.display = 'block';
-        iconMoon.style.display = 'none';
-        if (hljsTheme) hljsTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
-      } else {
-        iconSun.style.display = 'none';
-        iconMoon.style.display = 'block';
-        if (hljsTheme) hljsTheme.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
+      const isDark = theme === 'dark';
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute('content', isDark ? '#0a0d12' : '#f8fafc');
+      }
+
+      document.querySelectorAll('.icon-theme-sun').forEach(el => {
+        el.style.display = isDark ? 'block' : 'none';
+      });
+      document.querySelectorAll('.icon-theme-moon').forEach(el => {
+        el.style.display = isDark ? 'none' : 'block';
+      });
+
+      if (hljsTheme) {
+        hljsTheme.href = isDark
+          ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css'
+          : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
       }
 
       renderMermaidDiagrams();
     }
 
-    btnThemeToggle.onclick = () => {
-      const nextTheme = state.theme === 'dark' ? 'light' : 'dark';
-      applyTheme(nextTheme);
+    document.querySelectorAll('.btn-theme-toggle').forEach(btn => {
+      btn.onclick = () => {
+        const nextTheme = state.theme === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+      };
+    });
+
+    // Mobile More Menu Sheet Controls
+    const mobileMenuModal = document.getElementById('mobile-more-menu-modal');
+    const btnMobileMoreMenu = document.getElementById('btn-mobile-more-menu');
+    const btnCloseMobileMenu = document.getElementById('btn-close-mobile-menu');
+
+    function openMobileMenu() {
+      if (mobileMenuModal) {
+        mobileMenuModal.classList.add('open');
+        backdrop.classList.add('active');
+      }
+    }
+
+    function closeMobileMenu() {
+      if (mobileMenuModal) {
+        mobileMenuModal.classList.remove('open');
+      }
+      if (!commentsSidebar.classList.contains('open') && !document.querySelector('.modal.active') && !quickComposerSheet.classList.contains('open')) {
+        backdrop.classList.remove('active');
+      }
+    }
+
+    if (btnMobileMoreMenu) btnMobileMoreMenu.onclick = openMobileMenu;
+    if (btnCloseMobileMenu) btnCloseMobileMenu.onclick = closeMobileMenu;
+
+    document.getElementById('m-menu-paste-edit').onclick = () => {
+      closeMobileMenu();
+      rawInput.value = state.rawMarkdown;
+      openModal('raw-editor-modal');
     };
+
+    document.getElementById('m-menu-load-sample').onclick = () => {
+      closeMobileMenu();
+      const sample = document.getElementById('sample-artifact-content').textContent.trim();
+      renderDocument(sample);
+      showToast('Loaded Antigravity Demo Artifact');
+    };
+
+    // PWA Service Worker & Install Prompt Handling
+    let deferredInstallPrompt = null;
+    const btnInstallDesktop = document.getElementById('btn-install-app');
+    const btnInstallMobile = document.getElementById('btn-install-app-mobile');
+    const mMenuInstall = document.getElementById('m-menu-install');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredInstallPrompt = e;
+      if (btnInstallDesktop) btnInstallDesktop.style.display = 'inline-flex';
+      if (btnInstallMobile) btnInstallMobile.style.display = 'inline-flex';
+      if (mMenuInstall) mMenuInstall.style.display = 'flex';
+    });
+
+    function triggerPwaInstall() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        deferredInstallPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast('Installing Artifact AI App...');
+          }
+          deferredInstallPrompt = null;
+          if (btnInstallDesktop) btnInstallDesktop.style.display = 'none';
+          if (btnInstallMobile) btnInstallMobile.style.display = 'none';
+          if (mMenuInstall) mMenuInstall.style.display = 'none';
+        });
+      } else {
+        showToast('To install: Tap browser menu (⋮ or Share) > "Add to Home Screen"');
+      }
+    }
+
+    if (btnInstallDesktop) btnInstallDesktop.onclick = triggerPwaInstall;
+    if (btnInstallMobile) btnInstallMobile.onclick = triggerPwaInstall;
+    if (mMenuInstall) mMenuInstall.onclick = () => {
+      closeMobileMenu();
+      triggerPwaInstall();
+    };
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').then((reg) => {
+          console.log('PWA ServiceWorker registered with scope:', reg.scope);
+        }).catch((err) => {
+          console.warn('PWA ServiceWorker registration notice:', err);
+        });
+      });
+    }
 
     // Modal & Toast Helpers
     const backdrop = document.getElementById('modal-backdrop');
@@ -2428,7 +2778,7 @@ graph TD
       if (modal) {
         modal.classList.remove('active');
       }
-      if (!document.querySelector('.modal.active') && !commentsSidebar.classList.contains('open')) {
+      if (!document.querySelector('.modal.active') && !commentsSidebar.classList.contains('open') && !quickComposerSheet.classList.contains('open') && !mobileMenuModal.classList.contains('open')) {
         backdrop.classList.remove('active');
       }
     }
@@ -2436,6 +2786,8 @@ graph TD
     backdrop.onclick = () => {
       document.querySelectorAll('.modal.active').forEach(m => m.classList.remove('active'));
       closeCommentsSidebar();
+      closeQuickComposer();
+      closeMobileMenu();
       backdrop.classList.remove('active');
     };
 
