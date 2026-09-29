@@ -1,7 +1,7 @@
 {
-  "id": "antigravity-artifact-ai-reader",
-  "name": "Antigravity Artifact Reader & AI Annotator",
-  "short_name": "Artifact AI",
+  "id": "artifacts-ai-reader",
+  "name": "Artifacts AI - Markdown Viewer & Annotation Tool",
+  "short_name": "Artifacts AI",
   "description": "Render markdown artifacts with alerts, carousels, diagrams and annotate with token-saving AI prompts.",
   "start_url": "./index.html",
   "scope": "./",

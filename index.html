@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Antigravity Artifact Viewer & AI Annotation Tool</title>
-  <meta name="description" content="Beautiful markdown & artifact reader with inline AI comments, alerts, carousels, mermaid diagrams, and token-saving AI prompt exporter.">
+  <title>Artifacts AI - Markdown Viewer & Annotation Tool</title>
+  <meta name="description" content="Artifacts AI - Beautiful markdown reader with inline comments, alerts, carousels, mermaid diagrams, formatting options, and token-saving AI prompts.">
   
   <!-- PWA & Mobile Web App Meta -->
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#0a0d12" id="meta-theme-color">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Artifact AI">
+  <meta name="apple-mobile-web-app-title" content="Artifacts AI">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -19,7 +19,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
   
   <!-- Highlight.js for Syntax Highlighting -->
   <link rel="stylesheet" id="hljs-theme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
@@ -91,6 +91,13 @@
       --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.4);
       --shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.6);
       
+      --font-serif: 'Merriweather', Georgia, Cambria, serif;
+      --doc-font-size: 1rem;
+      --doc-font-family: var(--font-sans);
+      --doc-max-width: 840px;
+      --doc-line-height: 1.72;
+      --doc-text-align: left;
+      
       --sidebar-width: 380px;
     }
 
@@ -139,6 +146,100 @@
       --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.06);
       --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
       --shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.12);
+    }
+
+    [data-theme="sepia"] {
+      --bg-base: #f5eedc;
+      --bg-surface: #fdfaf2;
+      --bg-surface-elevated: #efe6cf;
+      --bg-card: rgba(253, 250, 242, 0.95);
+      --bg-hover: #e5dac1;
+      --border-subtle: #e4d8be;
+      --border-strong: #cfbe9e;
+      
+      --text-main: #382c20;
+      --text-muted: #6b5845;
+      --text-subtle: #98826d;
+      
+      --accent: #b45309;
+      --accent-glow: rgba(180, 83, 9, 0.18);
+      --accent-hover: #92400e;
+      --accent-text: #b45309;
+      
+      --note-color: #0284c7;
+      --note-bg: rgba(2, 132, 199, 0.1);
+      --note-border: rgba(2, 132, 199, 0.35);
+      
+      --tip-color: #047857;
+      --tip-bg: rgba(4, 120, 87, 0.1);
+      --tip-border: rgba(4, 120, 87, 0.35);
+      
+      --important-color: #6d28d9;
+      --important-bg: rgba(109, 40, 217, 0.1);
+      --important-border: rgba(109, 40, 217, 0.35);
+      
+      --warning-color: #b45309;
+      --warning-bg: rgba(180, 83, 9, 0.12);
+      --warning-border: rgba(180, 83, 9, 0.35);
+      
+      --caution-color: #b91c1c;
+      --caution-bg: rgba(185, 28, 28, 0.1);
+      --caution-border: rgba(185, 28, 28, 0.35);
+      
+      --highlight-bg: rgba(245, 158, 11, 0.4);
+      --highlight-border: #d97706;
+      --highlight-active-bg: rgba(245, 158, 11, 0.7);
+
+      --shadow-sm: 0 1px 3px 0 rgba(70, 50, 20, 0.08);
+      --shadow-md: 0 4px 12px -2px rgba(70, 50, 20, 0.12);
+      --shadow-lg: 0 12px 28px -4px rgba(70, 50, 20, 0.16);
+    }
+
+    [data-theme="midnight"] {
+      --bg-base: #000000;
+      --bg-surface: #0a0a0a;
+      --bg-surface-elevated: #141414;
+      --bg-card: rgba(10, 10, 10, 0.95);
+      --bg-hover: #1f1f1f;
+      --border-subtle: #222222;
+      --border-strong: #383838;
+      
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.3);
+      --accent-hover: #0ea5e9;
+      --accent-text: #38bdf8;
+      
+      --note-color: #38bdf8;
+      --note-bg: rgba(56, 189, 248, 0.12);
+      --note-border: rgba(56, 189, 248, 0.4);
+      
+      --tip-color: #34d399;
+      --tip-bg: rgba(52, 211, 153, 0.12);
+      --tip-border: rgba(52, 211, 153, 0.4);
+      
+      --important-color: #a78bfa;
+      --important-bg: rgba(167, 139, 250, 0.12);
+      --important-border: rgba(167, 139, 250, 0.4);
+      
+      --warning-color: #fbbf24;
+      --warning-bg: rgba(251, 191, 36, 0.12);
+      --warning-border: rgba(251, 191, 36, 0.4);
+      
+      --caution-color: #f87171;
+      --caution-bg: rgba(248, 113, 113, 0.12);
+      --caution-border: rgba(248, 113, 113, 0.4);
+      
+      --highlight-bg: rgba(250, 204, 21, 0.38);
+      --highlight-border: #facc15;
+      --highlight-active-bg: rgba(250, 204, 21, 0.7);
+
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+      --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.75);
+      --shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.9);
     }
 
     * {
@@ -412,13 +513,14 @@
 
     .document-card {
       width: 100%;
-      max-width: 820px;
+      max-width: var(--doc-max-width, 840px);
       background: var(--bg-surface);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: 20px;
       box-shadow: var(--shadow-sm);
       position: relative;
+      transition: max-width 0.2s ease;
     }
 
     @media (min-width: 768px) {
@@ -445,6 +547,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
     .doc-stats-item {
@@ -455,9 +558,17 @@
 
     /* Markdown Rendered Typography */
     .markdown-body {
+      font-family: var(--doc-font-family, var(--font-sans));
       color: var(--text-main);
-      font-size: 1rem;
-      line-height: 1.72;
+      font-size: var(--doc-font-size, 1rem);
+      line-height: var(--doc-line-height, 1.72);
+      text-align: var(--doc-text-align, left);
+      transition: font-size 0.15s ease, line-height 0.15s ease;
+    }
+
+    .markdown-body.wrap-code pre {
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
     }
 
     .markdown-body h1,
@@ -503,6 +614,84 @@
 
     .markdown-body li {
       margin-bottom: 0.35em;
+    }
+
+    /* Task List / Checkbox Styling */
+    .markdown-body ul:has(.task-list-item),
+    .markdown-body ul.contains-task-list {
+      list-style-type: none !important;
+      padding-left: 0.2rem;
+    }
+
+    .markdown-body li.task-list-item {
+      list-style-type: none !important;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 0.45em;
+      position: relative;
+    }
+
+    .custom-checkbox-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      margin-top: 0.18em;
+      flex-shrink: 0;
+    }
+
+    .custom-checkbox-wrapper input[type="checkbox"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      cursor: pointer;
+    }
+
+    .custom-checkbox-box {
+      width: 19px;
+      height: 19px;
+      border-radius: 5px;
+      border: 2px solid var(--border-strong);
+      background: var(--bg-surface-elevated);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+      color: transparent;
+    }
+
+    .custom-checkbox-wrapper:hover .custom-checkbox-box {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+
+    .custom-checkbox-wrapper input:checked ~ .custom-checkbox-box {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+      transform: scale(1.02);
+    }
+
+    .custom-checkbox-box svg {
+      width: 13px;
+      height: 13px;
+      stroke-width: 3.2;
+    }
+
+    .task-item-content {
+      flex: 1;
+      min-width: 0;
+      transition: opacity 0.15s ease, color 0.15s ease;
+    }
+
+    .task-list-item.is-completed .task-item-content {
+      color: var(--text-subtle);
+      text-decoration: line-through;
+      text-decoration-color: var(--text-subtle);
     }
 
     .markdown-body hr {
@@ -852,19 +1041,27 @@
       vertical-align: middle;
     }
 
-    /* Floating Selection Comment Tooltip */
+    /* Floating Selection Comment Tooltip (Mobile & Desktop) */
     #selection-comment-tooltip {
       position: absolute;
       display: none;
-      z-index: 100;
+      z-index: 999999;
       background: var(--bg-surface-elevated);
       border: 1px solid var(--border-strong);
       border-radius: var(--radius-full);
-      padding: 4px 10px;
-      box-shadow: var(--shadow-lg);
+      padding: 6px 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1);
       transform: translate(-50%, -100%);
       margin-top: -8px;
       cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+    }
+
+    #selection-comment-tooltip.positioned-below {
+      transform: translate(-50%, 0);
+      margin-top: 0;
     }
 
     #selection-comment-tooltip button {
@@ -873,10 +1070,12 @@
       color: var(--text-main);
       display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
+      gap: 7px;
+      font-size: 0.88rem;
       font-weight: 600;
       cursor: pointer;
+      min-height: 32px;
+      white-space: nowrap;
     }
 
     #selection-comment-tooltip button svg {
@@ -1440,28 +1639,367 @@
       gap: 8px;
       transition: all 0.25s ease;
     }
+
+    /* Full Screen Mode */
+    body.fullscreen-mode header.app-header {
+      opacity: 0.95;
+    }
+
+    #btn-exit-fullscreen-floating {
+      position: fixed;
+      top: 14px;
+      right: 18px;
+      z-index: 999999;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-strong);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-lg);
+      display: none;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.2s ease;
+    }
+
+    #btn-exit-fullscreen-floating:hover {
+      background: var(--bg-hover);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    body.fullscreen-mode #btn-exit-fullscreen-floating {
+      display: flex;
+    }
+
+    /* Document Navigator & Tag Filter Bar */
+    .doc-navigator-panel {
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-bottom: 22px;
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      animation: fadeInDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .doc-navigator-panel.open {
+      display: flex;
+    }
+
+    .doc-navigator-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .doc-filter-input {
+      flex: 1;
+      min-width: 180px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 7px 12px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .doc-filter-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+    }
+
+    .tag-chips-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .doc-tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      border: 1px solid var(--border-subtle);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .doc-tag-pill:hover,
+    .doc-tag-pill.active {
+      background: var(--accent-glow);
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .doc-tag-pill.chapter-pill {
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+    }
+
+    /* Comments Search & Tag Filter in Sidebar */
+    .comments-filter-bar {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .comment-search-box {
+      width: 100%;
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 7px 10px;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .comment-search-box:focus {
+      border-color: var(--accent);
+    }
+
+    .comment-tags-filter-scroll {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .comment-tags-filter-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .comment-tag-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 2px 7px;
+      border-radius: var(--radius-full);
+      font-size: 0.68rem;
+      font-weight: 600;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      margin-right: 4px;
+      margin-top: 4px;
+    }
+
+    /* Tag suggestions in composer */
+    .composer-quick-tags {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      margin-bottom: 8px;
+    }
+
+    .composer-tag-chip {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: var(--radius-full);
+      background: var(--bg-surface-elevated);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.12s ease;
+    }
+
+    .composer-tag-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    /* Formatting Settings Controls */
+    .format-setting-group {
+      margin-bottom: 18px;
+    }
+
+    .format-setting-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .format-btn-group {
+      display: flex;
+      gap: 5px;
+      background: var(--bg-surface-elevated);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .format-btn-opt {
+      flex: 1;
+      padding: 7px 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: center;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .format-btn-opt:hover {
+      color: var(--text-main);
+    }
+
+    .format-btn-opt.active {
+      background: var(--bg-surface);
+      color: var(--accent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .theme-grid-selector {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .theme-opt-card {
+      border: 2px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 10px 6px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      background: var(--bg-surface-elevated);
+    }
+
+    .theme-opt-card:hover {
+      border-color: var(--accent);
+    }
+
+    .theme-opt-card.active {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+      color: var(--accent);
+    }
+
+    .theme-swatch {
+      width: 26px;
+      height: 26px;
+      border-radius: var(--radius-full);
+      border: 1px solid rgba(128, 128, 128, 0.4);
+    }
+
+    .format-slider-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .format-slider-row input[type="range"] {
+      flex: 1;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .format-slider-val {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      min-width: 48px;
+      text-align: right;
+    }
+
+    /* Chapter Append Modal Tabs */
+    .chapter-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-surface-elevated);
+      padding: 4px;
+      border-radius: var(--radius-md);
+      margin-bottom: 14px;
+    }
+
+    .chapter-tab {
+      flex: 1;
+      padding: 8px 12px;
+      text-align: center;
+      border-radius: var(--radius-sm);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .chapter-tab.active {
+      background: var(--bg-surface);
+      color: var(--accent);
+      box-shadow: var(--shadow-sm);
+    }
   </style>
 </head>
 <body>
 
   <!-- Top App Header -->
   <header class="app-header">
-    <div class="brand-section" id="btn-brand-home" title="Antigravity Artifact Reader">
+    <div class="brand-section" id="btn-brand-home" title="Artifacts AI">
       <div class="brand-badge">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
         </svg>
       </div>
       <div class="brand-title">
-        Antigravity <span>Artifacts</span>
-        <span class="sub">AI Annotator</span>
+        Artifacts <span>AI</span>
       </div>
     </div>
 
     <!-- Desktop Navigation Actions (Visible on Laptop / Desktop screens) -->
     <div class="desktop-nav-actions">
       <!-- Install PWA Button (Desktop) -->
-      <button class="btn" id="btn-install-app" style="display: none;" title="Install Artifact AI as Desktop App">
+      <button class="btn" id="btn-install-app" style="display: none;" title="Install Artifacts AI as Desktop App">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
         <span>Install App</span>
       </button>
@@ -1474,7 +2012,16 @@
         </svg>
         <span>Open MD</span>
       </button>
-      <input type="file" id="file-input" accept=".md,.markdown,.txt" style="display: none;">
+      <input type="file" id="file-input" accept=".md,.markdown,.txt" multiple style="display: none;">
+
+      <!-- Append Chapter Button -->
+      <button class="btn" id="btn-append-chapter" title="Append to Document as Chapter">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span>+ Chapter</span>
+      </button>
 
       <!-- Paste / Edit Raw Markdown -->
       <button class="btn" id="btn-raw-editor" title="Paste or Edit Raw Markdown">
@@ -1483,6 +2030,29 @@
           <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
         </svg>
         <span>Paste / Edit</span>
+      </button>
+
+      <!-- Formatting Settings Button -->
+      <button class="btn btn-icon" id="btn-formatting-settings" title="Formatting & Typography Settings">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+        </svg>
+      </button>
+
+      <!-- Fullscreen Toggle Button -->
+      <button class="btn btn-icon" id="btn-toggle-fullscreen" title="Toggle Fullscreen Mode">
+        <svg class="icon-fs-enter" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <polyline points="9 21 3 21 3 15"></polyline>
+          <line x1="21" y1="3" x2="14" y2="10"></line>
+          <line x1="3" y1="21" x2="10" y2="14"></line>
+        </svg>
+        <svg class="icon-fs-exit" style="display:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 14 10 14 10 20"></polyline>
+          <polyline points="20 10 14 10 14 4"></polyline>
+          <line x1="14" y1="10" x2="21" y2="3"></line>
+          <line x1="3" y1="21" x2="10" y2="14"></line>
+        </svg>
       </button>
 
       <!-- Export AI Prompt / Token-Saver -->
@@ -1530,6 +2100,23 @@
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
       </button>
 
+      <!-- Formatting Settings Button (Mobile) -->
+      <button class="btn btn-icon" id="btn-formatting-settings-mobile" title="Formatting Settings">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 7V4h16v3M9 20h6M12 4v16"/>
+        </svg>
+      </button>
+
+      <!-- Fullscreen Toggle Button (Mobile) -->
+      <button class="btn btn-icon" id="btn-toggle-fullscreen-mobile" title="Fullscreen">
+        <svg class="icon-fs-enter" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <polyline points="9 21 3 21 3 15"></polyline>
+          <line x1="21" y1="3" x2="14" y2="10"></line>
+          <line x1="3" y1="21" x2="10" y2="14"></line>
+        </svg>
+      </button>
+
       <!-- Light/Dark Mode Switcher (Mobile) -->
       <button class="btn btn-icon btn-theme-toggle" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
         <svg class="icon-theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1554,6 +2141,12 @@
       </button>
     </div>
   </header>
+
+  <!-- Floating Exit Fullscreen Button -->
+  <button id="btn-exit-fullscreen-floating" title="Exit Fullscreen Mode">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+    <span>Exit Fullscreen</span>
+  </button>
 
   <!-- Main Work Area -->
   <main class="app-main">
@@ -1588,9 +2181,29 @@
             <span class="doc-stats-item" id="doc-word-count">~0 words</span>
           </div>
           <div class="doc-stats">
+            <button class="btn btn-sm" id="btn-toggle-doc-navigator" title="Filter chapters and tags">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+              <span>Chapters & Tags</span>
+            </button>
             <span class="doc-stats-item" title="Highlight any text to attach an AI comment">
               💡 <em>Select text to comment</em>
             </span>
+          </div>
+        </div>
+
+        <!-- Collapsible Document Navigator & Tag Filter -->
+        <div class="doc-navigator-panel" id="doc-navigator-panel">
+          <div class="doc-navigator-row">
+            <input type="text" id="doc-search-filter" class="doc-filter-input" placeholder="Filter sections or search keywords in document...">
+            <button class="btn btn-sm" id="btn-reset-doc-filter" style="display:none;">Clear Filter</button>
+          </div>
+          <div class="doc-navigator-row" id="doc-chapters-bar" style="display:none;">
+            <span style="font-size:0.75rem; font-weight:700; color:var(--text-subtle);">CHAPTERS:</span>
+            <div class="tag-chips-group" id="doc-chapters-list"></div>
+          </div>
+          <div class="doc-navigator-row" id="doc-tags-bar" style="display:none;">
+            <span style="font-size:0.75rem; font-weight:700; color:var(--text-subtle);">DOCUMENT TAGS:</span>
+            <div class="tag-chips-group" id="doc-tags-list"></div>
           </div>
         </div>
 
@@ -1614,6 +2227,14 @@
         <button class="btn btn-icon" id="btn-close-comments" title="Close Panel">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
+      </div>
+
+      <!-- Comments Filter & Search Bar -->
+      <div class="comments-filter-bar">
+        <input type="text" id="comment-search-input" class="comment-search-box" placeholder="Filter comments or search #tag...">
+        <div class="comment-tags-filter-scroll" id="comment-tags-filter-bar">
+          <!-- Dynamically populated: All, #todo, #bug, etc. -->
+        </div>
       </div>
 
       <!-- Comments List -->
@@ -1644,6 +2265,14 @@
       </button>
     </div>
     <div class="quick-composer-quote" id="quick-quote-preview">“Selected text quote...”</div>
+    <div class="composer-quick-tags">
+      <span style="font-size:0.72rem; color:var(--text-subtle); margin-right:2px;">Tags:</span>
+      <span class="composer-tag-chip" data-tag="#todo">+ #todo</span>
+      <span class="composer-tag-chip" data-tag="#bug">+ #bug</span>
+      <span class="composer-tag-chip" data-tag="#review">+ #review</span>
+      <span class="composer-tag-chip" data-tag="#idea">+ #idea</span>
+      <span class="composer-tag-chip" data-tag="#question">+ #question</span>
+    </div>
     <textarea class="quick-composer-textarea" id="quick-composer-input" placeholder="Type your comment, feedback, or AI prompt instruction..."></textarea>
     <div class="quick-composer-footer">
       <button class="btn" id="btn-cancel-quick-composer">Cancel</button>
@@ -1683,13 +2312,25 @@
       </button>
     </div>
     <div class="mobile-menu-list">
+      <div class="mobile-menu-item" id="m-menu-append-chapter">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        <span>+ Append Chapter</span>
+      </div>
+      <div class="mobile-menu-item" id="m-menu-formatting">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3M9 20h6M12 4v16"/></svg>
+        <span>Formatting Settings</span>
+      </div>
+      <div class="mobile-menu-item" id="m-menu-fullscreen">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+        <span>Toggle Fullscreen</span>
+      </div>
       <div class="mobile-menu-item" id="m-menu-paste-edit">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
         <span>Paste / Edit Markdown</span>
       </div>
       <div class="mobile-menu-item" id="m-menu-load-sample">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 2v20"></path></svg>
-        <span>Load Antigravity Sample</span>
+        <span>Load Demo Sample</span>
       </div>
       <div class="mobile-menu-item" id="m-menu-install" style="display:none;">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
@@ -1733,6 +2374,15 @@
         <span>Estimated Token Usage: <strong class="token-stat" id="stat-snippet-tokens">~0</strong> tokens (vs <span id="stat-full-tokens">~0</span> in full doc)</span>
         <span style="font-weight:700;" id="stat-percentage-saved">⚡ 0% Saved</span>
       </div>
+
+      <!-- Scope Filter Toggle -->
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-top:14px; font-size:0.82rem;">
+        <span style="color:var(--text-muted);">Scope:</span>
+        <div style="display:flex; gap:6px;">
+          <button class="btn btn-sm active" id="btn-export-scope-all">All Comments (<span id="export-count-all">0</span>)</button>
+          <button class="btn btn-sm" id="btn-export-scope-filtered">Filtered Only (<span id="export-count-filtered">0</span>)</button>
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
       <button class="btn" id="btn-download-export-file">
@@ -1746,6 +2396,153 @@
     </div>
   </div>
 
+  <!-- Formatting Settings Modal -->
+  <div class="modal" id="formatting-settings-modal">
+    <div class="modal-header">
+      <div class="modal-title">Formatting & Reading Settings</div>
+      <button class="btn btn-icon" id="btn-close-formatting-modal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+    </div>
+    <div class="modal-body">
+      <!-- Theme Selection -->
+      <div class="format-setting-group">
+        <div class="format-setting-title">Theme Palette</div>
+        <div class="theme-grid-selector">
+          <div class="theme-opt-card" data-set-theme="dark">
+            <div class="theme-swatch" style="background:#0a0d12; border-color:#38bdf8;"></div>
+            <span>Dark</span>
+          </div>
+          <div class="theme-opt-card" data-set-theme="light">
+            <div class="theme-swatch" style="background:#f8fafc; border-color:#0284c7;"></div>
+            <span>Light</span>
+          </div>
+          <div class="theme-opt-card" data-set-theme="sepia">
+            <div class="theme-swatch" style="background:#f5eedc; border-color:#b45309;"></div>
+            <span>Sepia</span>
+          </div>
+          <div class="theme-opt-card" data-set-theme="midnight">
+            <div class="theme-swatch" style="background:#000000; border-color:#38bdf8;"></div>
+            <span>Midnight</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Font Family -->
+      <div class="format-setting-group">
+        <div class="format-setting-title">Font Family</div>
+        <div class="format-btn-group" id="format-font-family-group">
+          <button class="format-btn-opt active" data-font="sans">Modern Sans (Inter)</button>
+          <button class="format-btn-opt" data-font="serif">Book Serif (Merriweather)</button>
+          <button class="format-btn-opt" data-font="mono">Code Mono</button>
+        </div>
+      </div>
+
+      <!-- Font Size -->
+      <div class="format-setting-group">
+        <div class="format-setting-title">
+          <span>Font Size</span>
+          <span class="format-slider-val" id="format-font-size-val">16px</span>
+        </div>
+        <div class="format-slider-row">
+          <input type="range" id="format-font-size-slider" min="13" max="24" step="1" value="16">
+        </div>
+        <div class="format-btn-group" style="margin-top:8px;" id="format-font-preset-group">
+          <button class="format-btn-opt" data-size="14">Small (14px)</button>
+          <button class="format-btn-opt active" data-size="16">Normal (16px)</button>
+          <button class="format-btn-opt" data-size="18">Large (18px)</button>
+          <button class="format-btn-opt" data-size="20">XL (20px)</button>
+        </div>
+      </div>
+
+      <!-- Content Reading Width -->
+      <div class="format-setting-group">
+        <div class="format-setting-title">Content Reading Width</div>
+        <div class="format-btn-group" id="format-width-group">
+          <button class="format-btn-opt" data-width="680px">Compact (680px)</button>
+          <button class="format-btn-opt active" data-width="840px">Standard (840px)</button>
+          <button class="format-btn-opt" data-width="1080px">Wide (1080px)</button>
+          <button class="format-btn-opt" data-width="100%">Full Width</button>
+        </div>
+      </div>
+
+      <!-- Line Spacing -->
+      <div class="format-setting-group">
+        <div class="format-setting-title">Line Spacing</div>
+        <div class="format-btn-group" id="format-line-height-group">
+          <button class="format-btn-opt" data-line-height="1.45">Compact (1.45)</button>
+          <button class="format-btn-opt active" data-line-height="1.72">Normal (1.72)</button>
+          <button class="format-btn-opt" data-line-height="2.0">Relaxed (2.0)</button>
+        </div>
+      </div>
+
+      <!-- Text Alignment & Code Wrapping -->
+      <div class="format-setting-group">
+        <div class="format-setting-title">Text Alignment & Code Layout</div>
+        <div style="display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+          <div class="format-btn-group" style="flex:1; min-width:180px;" id="format-align-group">
+            <button class="format-btn-opt active" data-align="left">Left Aligned</button>
+            <button class="format-btn-opt" data-align="justify">Justified</button>
+          </div>
+          <label style="display:flex; align-items:center; gap:6px; font-size:0.82rem; cursor:pointer; user-select:none;">
+            <input type="checkbox" id="format-wrap-code-checkbox">
+            <span>Wrap Code Lines</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" id="btn-reset-formatting">Reset to Defaults</button>
+      <button class="btn btn-primary" id="btn-close-formatting-done">Done</button>
+    </div>
+  </div>
+
+  <!-- Append Chapter Modal -->
+  <div class="modal" id="append-chapter-modal">
+    <div class="modal-header">
+      <div class="modal-title">Append as New Chapter</div>
+      <button class="btn btn-icon" id="btn-close-chapter-modal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+    </div>
+    <div class="modal-body">
+      <div style="margin-bottom:14px;">
+        <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:6px;">Chapter Title</label>
+        <input type="text" id="append-chapter-title" placeholder="e.g. Chapter 2: Configuration & API" class="doc-filter-input" style="width:100%; box-sizing:border-box;">
+      </div>
+
+      <div class="chapter-tabs">
+        <div class="chapter-tab active" id="tab-btn-chapter-upload" data-tab="upload">📁 Choose .md File</div>
+        <div class="chapter-tab" id="tab-btn-chapter-paste" data-tab="paste">✍️ Paste Markdown</div>
+      </div>
+
+      <div id="chapter-pane-upload">
+        <div style="border:2px dashed var(--border-strong); border-radius:var(--radius-md); padding:22px; text-align:center; background:var(--bg-surface-elevated); cursor:pointer;" id="chapter-drop-zone">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:var(--accent); margin-bottom:8px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          <p style="font-size:0.88rem; font-weight:600; margin-bottom:4px;">Click to select a Markdown (.md) file</p>
+          <p style="font-size:0.75rem; color:var(--text-subtle);">File content will be read and appended as a chapter</p>
+          <input type="file" id="chapter-file-input" accept=".md,.markdown,.txt" style="display:none;">
+        </div>
+        <div id="chapter-file-preview-info" style="display:none; margin-top:10px; font-size:0.82rem; color:var(--tip-color); background:var(--tip-bg); padding:8px 12px; border-radius:var(--radius-sm);"></div>
+      </div>
+
+      <div id="chapter-pane-paste" style="display:none;">
+        <textarea id="append-chapter-text" placeholder="Type or paste markdown content for this chapter..." style="width:100%; height:180px; font-family:var(--font-mono); font-size:0.85rem; padding:12px; border-radius:var(--radius-md); background:var(--bg-surface-elevated); color:var(--text-main); border:1px solid var(--border-subtle); outline:none; resize:vertical; box-sizing:border-box;"></textarea>
+      </div>
+
+      <div style="margin-top:14px; display:flex; gap:16px; flex-wrap:wrap; font-size:0.82rem; color:var(--text-muted);">
+        <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+          <input type="checkbox" id="append-chapter-divider" checked>
+          <span>Add divider rule (---) before chapter</span>
+        </label>
+        <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+          <input type="checkbox" id="append-chapter-level" checked>
+          <span>Heading 1 (#)</span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" id="btn-cancel-chapter-modal">Cancel</button>
+      <button class="btn btn-primary" id="btn-confirm-append-chapter">Append Chapter</button>
+    </div>
+  </div>
+
   <!-- Raw Markdown Paste / Edit Modal -->
   <div class="modal" id="raw-editor-modal">
     <div class="modal-header">
@@ -1753,10 +2550,12 @@
       <button class="btn btn-icon" id="btn-close-raw-modal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
     </div>
     <div class="modal-body">
-      <textarea id="raw-markdown-input" style="width:100%; height:320px; font-family:var(--font-mono); font-size:0.85rem; padding:12px; border-radius:var(--radius-md); background:var(--bg-surface-elevated); color:var(--text-main); border:1px solid var(--border-subtle); outline:none; resize:vertical;"></textarea>
+      <textarea id="raw-markdown-input" placeholder="Type or paste markdown content here..." style="width:100%; height:320px; font-family:var(--font-mono); font-size:0.85rem; padding:12px; border-radius:var(--radius-md); background:var(--bg-surface-elevated); color:var(--text-main); border:1px solid var(--border-subtle); outline:none; resize:vertical; box-sizing:border-box;"></textarea>
     </div>
     <div class="modal-footer">
-      <button class="btn" id="btn-load-sample-artifact">Load Antigravity Sample</button>
+      <button class="btn" id="btn-load-current-doc">Load Current Doc</button>
+      <button class="btn" id="btn-load-sample-artifact">Load Demo Sample</button>
+      <button class="btn" id="btn-append-raw-as-chapter">+ Append as Chapter</button>
       <button class="btn btn-primary" id="btn-apply-raw-markdown">Render Markdown</button>
     </div>
   </div>
@@ -1883,13 +2682,19 @@ graph TD
     // ==========================================
     const state = {
       rawMarkdown: '',
-      docTitle: 'Antigravity Artifact',
-      comments: [], // { id, quote, text, section, timestamp, resolved }
+      docTitle: 'Artifacts AI',
+      comments: [], // { id, quote, text, section, timestamp, resolved, tags: [] }
       selectedQuote: '',
       selectedRange: null,
       activeCommentId: null,
       theme: 'dark',
-      currentExportType: 'token-saver'
+      currentExportType: 'token-saver',
+      exportScope: 'all',
+      commentTagFilter: 'all',
+      commentSearchQuery: '',
+      docSearchFilter: '',
+      docSelectedChapter: 'all',
+      docSelectedTag: 'all'
     };
 
     // Helper: Estimate tokens
@@ -2052,6 +2857,81 @@ graph TD
       return `<blockquote>${quote}</blockquote>`;
     };
 
+    let taskCounter = 0;
+
+    // Universal List Item Renderer with Interactive Checkboxes (Task Lists)
+    customRenderer.listitem = function(token) {
+      let isTask = false;
+      let isChecked = false;
+      let text = '';
+
+      if (typeof token === 'object' && token !== null) {
+        isTask = !!token.task;
+        isChecked = !!token.checked;
+        text = token.text || '';
+        if (token.tokens && token.tokens.length > 0 && this.parser && this.parser.parseInline) {
+          text = this.parser.parseInline(token.tokens);
+        }
+      } else {
+        text = token || '';
+        const taskMatch = text.match(/^\s*\[([ xX])\]\s*(.*)/s);
+        if (taskMatch) {
+          isTask = true;
+          isChecked = taskMatch[1].toLowerCase() === 'x';
+          text = taskMatch[2];
+        }
+      }
+
+      // Check for inline checkbox tags if marked rendered it already
+      const checkTagMatch = text.match(/^\s*<input[^>]*type="checkbox"[^>]*>\s*(.*)/is);
+      if (checkTagMatch) {
+        isTask = true;
+        isChecked = text.includes('checked');
+        text = checkTagMatch[1];
+      }
+
+      if (isTask) {
+        const taskId = 'task-' + (taskCounter++);
+        return `
+        <li class="task-list-item ${isChecked ? 'is-completed' : ''}" data-task-id="${taskId}">
+          <label class="custom-checkbox-wrapper" onclick="event.stopPropagation();">
+            <input type="checkbox" class="task-checkbox" ${isChecked ? 'checked' : ''} onchange="toggleTaskItem(this, event)">
+            <span class="custom-checkbox-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </span>
+          </label>
+          <span class="task-item-content">${text}</span>
+        </li>`;
+      }
+
+      return `<li>${text}</li>`;
+    };
+
+    function toggleTaskItem(checkbox, event) {
+      if (event) event.stopPropagation();
+      const li = checkbox.closest('.task-list-item');
+      if (!li) return;
+
+      const isChecked = checkbox.checked;
+      li.classList.toggle('is-completed', isChecked);
+
+      const contentEl = li.querySelector('.task-item-content');
+      const taskText = contentEl ? contentEl.textContent.trim() : '';
+
+      if (taskText) {
+        // Find corresponding markdown task item and update checked state
+        const cleanSnippet = taskText.substring(0, 30).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const pattern = new RegExp(`([-*+]\\s+)\\[([ xX])\\](\\s+.*?${cleanSnippet})`, 'i');
+        const match = state.rawMarkdown.match(pattern);
+        if (match) {
+          const newBox = isChecked ? '[x]' : '[ ]';
+          state.rawMarkdown = state.rawMarkdown.replace(pattern, `$1${newBox}$3`);
+        }
+      }
+
+      showToast(isChecked ? 'Task completed! ✓' : 'Task marked pending');
+    }
+
     marked.use({
       gfm: true,
       breaks: true,
@@ -2082,7 +2962,7 @@ graph TD
       state.rawMarkdown = markdownText;
 
       const h1Match = markdownText.match(/^#\s+(.+)$/m);
-      state.docTitle = h1Match ? h1Match[1].trim() : 'Artifact Document';
+      state.docTitle = h1Match ? h1Match[1].trim() : 'Artifacts AI Document';
       docTitleDisplay.textContent = state.docTitle;
 
       const wordCount = (markdownText.match(/\b\w+\b/g) || []).length;
@@ -2100,6 +2980,7 @@ graph TD
       setupCarousels();
       renderMermaidDiagrams();
       applyHighlightsToDocument();
+      updateDocumentNavigator();
     }
 
     // Build Table of Contents
@@ -2212,16 +3093,513 @@ graph TD
       }
     }
 
-    // Handle text selection for commenting
+    // ==========================================
+    // Formatting & Reading Settings
+    // ==========================================
+    const defaultFormatting = {
+      theme: 'dark',
+      fontFamily: 'sans',
+      fontSize: 16,
+      readingWidth: '840px',
+      lineHeight: '1.72',
+      textAlign: 'left',
+      wrapCode: false
+    };
+
+    let formatting = Object.assign({}, defaultFormatting);
+
+    function loadFormattingSettings() {
+      try {
+        const saved = localStorage.getItem('artifacts_ai_formatting');
+        if (saved) {
+          formatting = Object.assign({}, defaultFormatting, JSON.parse(saved));
+        }
+      } catch (e) {}
+      applyFormattingSettings(formatting);
+    }
+
+    function saveFormattingSettings() {
+      try {
+        localStorage.setItem('artifacts_ai_formatting', JSON.stringify(formatting));
+      } catch (e) {}
+    }
+
+    function applyFormattingSettings(cfg) {
+      let ff = "var(--font-sans)";
+      if (cfg.fontFamily === 'serif') ff = "var(--font-serif)";
+      else if (cfg.fontFamily === 'mono') ff = "var(--font-mono)";
+      document.documentElement.style.setProperty('--doc-font-family', ff);
+
+      document.documentElement.style.setProperty('--doc-font-size', `${cfg.fontSize}px`);
+      const slider = document.getElementById('format-font-size-slider');
+      const valDisplay = document.getElementById('format-font-size-val');
+      if (slider) slider.value = cfg.fontSize;
+      if (valDisplay) valDisplay.textContent = `${cfg.fontSize}px`;
+
+      document.documentElement.style.setProperty('--doc-max-width', cfg.readingWidth);
+      document.documentElement.style.setProperty('--doc-line-height', cfg.lineHeight);
+      document.documentElement.style.setProperty('--doc-text-align', cfg.textAlign);
+
+      if (renderTarget) {
+        renderTarget.classList.toggle('wrap-code', !!cfg.wrapCode);
+      }
+      const wrapCheckbox = document.getElementById('format-wrap-code-checkbox');
+      if (wrapCheckbox) wrapCheckbox.checked = !!cfg.wrapCode;
+
+      if (cfg.theme) {
+        applyTheme(cfg.theme);
+      }
+
+      updateFormattingUiActiveStates();
+    }
+
+    function updateFormattingUiActiveStates() {
+      document.querySelectorAll('.theme-opt-card').forEach(card => {
+        card.classList.toggle('active', card.getAttribute('data-set-theme') === formatting.theme);
+      });
+      document.querySelectorAll('#format-font-family-group .format-btn-opt').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-font') === formatting.fontFamily);
+      });
+      document.querySelectorAll('#format-font-preset-group .format-btn-opt').forEach(btn => {
+        btn.classList.toggle('active', parseInt(btn.getAttribute('data-size')) === parseInt(formatting.fontSize));
+      });
+      document.querySelectorAll('#format-width-group .format-btn-opt').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-width') === formatting.readingWidth);
+      });
+      document.querySelectorAll('#format-line-height-group .format-btn-opt').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-line-height') === formatting.lineHeight);
+      });
+      document.querySelectorAll('#format-align-group .format-btn-opt').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-align') === formatting.textAlign);
+      });
+    }
+
+    // Formatting Settings Modal Wiring
+    const btnFormatDesktop = document.getElementById('btn-formatting-settings');
+    const btnFormatMobile = document.getElementById('btn-formatting-settings-mobile');
+    const mMenuFormat = document.getElementById('m-menu-formatting');
+    const btnCloseFormat = document.getElementById('btn-close-formatting-modal');
+    const btnCloseFormatDone = document.getElementById('btn-close-formatting-done');
+    const btnResetFormat = document.getElementById('btn-reset-formatting');
+
+    function openFormattingModal() {
+      updateFormattingUiActiveStates();
+      openModal('formatting-settings-modal');
+    }
+
+    if (btnFormatDesktop) btnFormatDesktop.onclick = openFormattingModal;
+    if (btnFormatMobile) btnFormatMobile.onclick = openFormattingModal;
+    if (mMenuFormat) mMenuFormat.onclick = () => { closeMobileMenu(); openFormattingModal(); };
+    if (btnCloseFormat) btnCloseFormat.onclick = () => closeModal('formatting-settings-modal');
+    if (btnCloseFormatDone) btnCloseFormatDone.onclick = () => closeModal('formatting-settings-modal');
+
+    if (btnResetFormat) {
+      btnResetFormat.onclick = () => {
+        formatting = Object.assign({}, defaultFormatting);
+        saveFormattingSettings();
+        applyFormattingSettings(formatting);
+        showToast('Formatting reset to default');
+      };
+    }
+
+    document.querySelectorAll('.theme-opt-card').forEach(card => {
+      card.onclick = () => {
+        const theme = card.getAttribute('data-set-theme');
+        formatting.theme = theme;
+        saveFormattingSettings();
+        applyFormattingSettings(formatting);
+      };
+    });
+
+    document.querySelectorAll('#format-font-family-group .format-btn-opt').forEach(btn => {
+      btn.onclick = () => {
+        formatting.fontFamily = btn.getAttribute('data-font');
+        saveFormattingSettings();
+        applyFormattingSettings(formatting);
+      };
+    });
+
+    const fontSizeSlider = document.getElementById('format-font-size-slider');
+    if (fontSizeSlider) {
+      fontSizeSlider.oninput = (e) => {
+        formatting.fontSize = parseInt(e.target.value);
+        saveFormattingSettings();
+        applyFormattingSettings(formatting);
+      };
+    }
+    document.querySelectorAll('#format-font-preset-group .format-btn-opt').forEach(btn => {
+      btn.onclick = () => {
+        formatting.fontSize = parseInt(btn.getAttribute('data-size'));
+        saveFormattingSettings();
+        applyFormattingSettings(formatting);
+      };
+    });
+
+    document.querySelectorAll('#format-width-group .format-btn-opt').forEach(btn => {
+      btn.onclick = () => {
+        formatting.readingWidth = btn.getAttribute('data-width');
+        saveFormattingSettings();
+        applyFormattingSettings(formatting);
+      };
+    });
+
+    document.querySelectorAll('#format-line-height-group .format-btn-opt').forEach(btn => {
+      btn.onclick = () => {
+        formatting.lineHeight = btn.getAttribute('data-line-height');
+        saveFormattingSettings();
+        applyFormattingSettings(formatting);
+      };
+    });
+
+    document.querySelectorAll('#format-align-group .format-btn-opt').forEach(btn => {
+      btn.onclick = () => {
+        formatting.textAlign = btn.getAttribute('data-align');
+        saveFormattingSettings();
+        applyFormattingSettings(formatting);
+      };
+    });
+
+    const wrapCodeCheckbox = document.getElementById('format-wrap-code-checkbox');
+    if (wrapCodeCheckbox) {
+      wrapCodeCheckbox.onchange = (e) => {
+        formatting.wrapCode = e.target.checked;
+        saveFormattingSettings();
+        applyFormattingSettings(formatting);
+      };
+    }
+
+    // ==========================================
+    // Fullscreen Option
+    // ==========================================
+    function toggleFullscreen() {
+      const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      if (!isFullscreen) {
+        const docEl = document.documentElement;
+        if (docEl.requestFullscreen) {
+          docEl.requestFullscreen().catch(err => console.warn(err));
+        } else if (docEl.webkitRequestFullscreen) {
+          docEl.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(err => console.warn(err));
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    }
+
+    function onFullscreenChange() {
+      const isFullscreen = !!(document.fullscreenElement || document.webkitFullscreenElement);
+      document.body.classList.toggle('fullscreen-mode', isFullscreen);
+      document.querySelectorAll('.icon-fs-enter').forEach(el => el.style.display = isFullscreen ? 'none' : 'block');
+      document.querySelectorAll('.icon-fs-exit').forEach(el => el.style.display = isFullscreen ? 'block' : 'none');
+    }
+
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullscreenChange);
+
+    const btnFsDesktop = document.getElementById('btn-toggle-fullscreen');
+    const btnFsMobile = document.getElementById('btn-toggle-fullscreen-mobile');
+    const mMenuFs = document.getElementById('m-menu-fullscreen');
+    const btnExitFsFloating = document.getElementById('btn-exit-fullscreen-floating');
+
+    if (btnFsDesktop) btnFsDesktop.onclick = toggleFullscreen;
+    if (btnFsMobile) btnFsMobile.onclick = toggleFullscreen;
+    if (mMenuFs) mMenuFs.onclick = () => { closeMobileMenu(); toggleFullscreen(); };
+    if (btnExitFsFloating) btnExitFsFloating.onclick = toggleFullscreen;
+
+    // ==========================================
+    // Append to MD as Chapters
+    // ==========================================
+    function openAppendChapterModal(prefilledTitle = '', prefilledContent = '') {
+      const existingH1Count = (state.rawMarkdown.match(/^#\s+/gm) || []).length;
+      document.getElementById('append-chapter-title').value = prefilledTitle || `Chapter ${existingH1Count + 1}`;
+      document.getElementById('append-chapter-text').value = prefilledContent || '';
+      const previewEl = document.getElementById('chapter-file-preview-info');
+      if (previewEl) {
+        previewEl.style.display = 'none';
+        previewEl.textContent = '';
+      }
+      openModal('append-chapter-modal');
+    }
+
+    function appendChapterToDocument(title, content, headingLevel = '#', addDivider = true) {
+      const cleanTitle = (title || '').trim();
+      const cleanContent = (content || '').trim();
+
+      if (!cleanTitle && !cleanContent) {
+        showToast('Please provide a chapter title or content.');
+        return;
+      }
+
+      let appendMarkdown = '';
+      if (state.rawMarkdown.trim().length > 0) {
+        appendMarkdown += '\n\n';
+        if (addDivider) {
+          appendMarkdown += '---\n\n';
+        }
+      }
+
+      if (cleanTitle) {
+        appendMarkdown += `${headingLevel} ${cleanTitle}\n\n`;
+      }
+      if (cleanContent) {
+        appendMarkdown += `${cleanContent}\n`;
+      }
+
+      state.rawMarkdown += appendMarkdown;
+      renderDocument(state.rawMarkdown);
+      saveCommentsToStorage();
+
+      setTimeout(() => {
+        const headings = renderTarget.querySelectorAll('h1, h2');
+        if (headings.length > 0) {
+          const lastHeading = headings[headings.length - 1];
+          lastHeading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          lastHeading.style.transition = 'color 0.3s ease';
+          lastHeading.style.color = 'var(--accent)';
+          setTimeout(() => { lastHeading.style.color = ''; }, 1800);
+        }
+      }, 200);
+
+      closeModal('append-chapter-modal');
+      showToast(`Chapter "${cleanTitle || 'New Chapter'}" appended!`);
+    }
+
+    const btnAppendChapter = document.getElementById('btn-append-chapter');
+    const mMenuAppendChapter = document.getElementById('m-menu-append-chapter');
+    const btnCloseChapterModal = document.getElementById('btn-close-chapter-modal');
+    const btnCancelChapterModal = document.getElementById('btn-cancel-chapter-modal');
+    const btnConfirmAppendChapter = document.getElementById('btn-confirm-append-chapter');
+    const btnAppendRawChapter = document.getElementById('btn-append-raw-as-chapter');
+
+    if (btnAppendChapter) btnAppendChapter.onclick = () => openAppendChapterModal();
+    if (mMenuAppendChapter) mMenuAppendChapter.onclick = () => { closeMobileMenu(); openAppendChapterModal(); };
+    if (btnCloseChapterModal) btnCloseChapterModal.onclick = () => closeModal('append-chapter-modal');
+    if (btnCancelChapterModal) btnCancelChapterModal.onclick = () => closeModal('append-chapter-modal');
+
+    const tabUpload = document.getElementById('tab-btn-chapter-upload');
+    const tabPaste = document.getElementById('tab-btn-chapter-paste');
+    const paneUpload = document.getElementById('chapter-pane-upload');
+    const panePaste = document.getElementById('chapter-pane-paste');
+
+    if (tabUpload && tabPaste) {
+      tabUpload.onclick = () => {
+        tabUpload.classList.add('active');
+        tabPaste.classList.remove('active');
+        if (paneUpload) paneUpload.style.display = 'block';
+        if (panePaste) panePaste.style.display = 'none';
+      };
+      tabPaste.onclick = () => {
+        tabPaste.classList.add('active');
+        tabUpload.classList.remove('active');
+        if (panePaste) panePaste.style.display = 'block';
+        if (paneUpload) paneUpload.style.display = 'none';
+      };
+    }
+
+    const chapterFileInput = document.getElementById('chapter-file-input');
+    const chapterDropZone = document.getElementById('chapter-drop-zone');
+    const chapterPreviewInfo = document.getElementById('chapter-file-preview-info');
+
+    if (chapterDropZone && chapterFileInput) {
+      chapterDropZone.onclick = () => chapterFileInput.click();
+      chapterFileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          const content = ev.target.result;
+          const h1Match = content.match(/^#\s+(.+)$/m);
+          const autoTitle = h1Match ? h1Match[1].trim() : file.name.replace(/\.(md|markdown|txt)$/i, '');
+          document.getElementById('append-chapter-title').value = autoTitle;
+          document.getElementById('append-chapter-text').value = content;
+          if (chapterPreviewInfo) {
+            chapterPreviewInfo.style.display = 'block';
+            chapterPreviewInfo.textContent = `✓ Selected "${file.name}" (~${(content.match(/\b\w+\b/g) || []).length} words)`;
+          }
+        };
+        reader.readAsText(file);
+      };
+    }
+
+    if (btnConfirmAppendChapter) {
+      btnConfirmAppendChapter.onclick = () => {
+        const title = document.getElementById('append-chapter-title').value;
+        const content = document.getElementById('append-chapter-text').value;
+        const addDivider = document.getElementById('append-chapter-divider').checked;
+        const isH1 = document.getElementById('append-chapter-level').checked;
+        appendChapterToDocument(title, content, isH1 ? '#' : '##', addDivider);
+      };
+    }
+
+    if (btnAppendRawChapter) {
+      btnAppendRawChapter.onclick = () => {
+        const rawContent = rawInput.value;
+        if (!rawContent.trim()) {
+          showToast('Please type markdown content first.');
+          return;
+        }
+        closeModal('raw-editor-modal');
+        const h1Match = rawContent.match(/^#\s+(.+)$/m);
+        const autoTitle = h1Match ? h1Match[1].trim() : 'New Chapter';
+        appendChapterToDocument(autoTitle, rawContent.replace(/^#\s+.+$/m, '').trim());
+      };
+    }
+
+    // ==========================================
+    // Document Navigator & Tag Filtering
+    // ==========================================
+    const btnToggleDocNavigator = document.getElementById('btn-toggle-doc-navigator');
+    const docNavigatorPanel = document.getElementById('doc-navigator-panel');
+    const docSearchFilter = document.getElementById('doc-search-filter');
+    const btnResetDocFilter = document.getElementById('btn-reset-doc-filter');
+
+    if (btnToggleDocNavigator && docNavigatorPanel) {
+      btnToggleDocNavigator.onclick = () => {
+        docNavigatorPanel.classList.toggle('open');
+        if (docNavigatorPanel.classList.contains('open')) {
+          updateDocumentNavigator();
+          if (docSearchFilter) docSearchFilter.focus();
+        }
+      };
+    }
+
+    if (docSearchFilter) {
+      docSearchFilter.oninput = (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        state.docSearchFilter = query;
+        if (btnResetDocFilter) btnResetDocFilter.style.display = query ? 'inline-flex' : 'none';
+
+        if (!query) {
+          renderTarget.querySelectorAll('h1, h2, h3, h4, p, ul, ol, blockquote, .antigravity-alert, .code-block-wrapper, .artifact-carousel').forEach(el => {
+            el.style.display = '';
+          });
+          return;
+        }
+
+        renderTarget.querySelectorAll('p, li, blockquote, h1, h2, h3').forEach(el => {
+          const match = el.textContent.toLowerCase().includes(query);
+          el.style.display = match ? '' : 'none';
+        });
+      };
+    }
+
+    if (btnResetDocFilter) {
+      btnResetDocFilter.onclick = () => {
+        if (docSearchFilter) docSearchFilter.value = '';
+        state.docSearchFilter = '';
+        state.docSelectedChapter = 'all';
+        state.docSelectedTag = 'all';
+        btnResetDocFilter.style.display = 'none';
+        renderTarget.querySelectorAll('h1, h2, h3, h4, p, ul, ol, blockquote, .antigravity-alert, .code-block-wrapper, .artifact-carousel').forEach(el => {
+          el.style.display = '';
+        });
+        updateDocumentNavigator();
+        showToast('Document filters cleared');
+      };
+    }
+
+    function updateDocumentNavigator() {
+      const headings = Array.from(renderTarget.querySelectorAll('h1, h2, h3'));
+      const chaptersList = document.getElementById('doc-chapters-list');
+      const chaptersBar = document.getElementById('doc-chapters-bar');
+      const tagsList = document.getElementById('doc-tags-list');
+      const tagsBar = document.getElementById('doc-tags-bar');
+
+      if (chaptersList && chaptersBar) {
+        if (headings.length > 0) {
+          chaptersBar.style.display = 'flex';
+          let chapHtml = `<span class="doc-tag-pill chapter-pill ${state.docSelectedChapter === 'all' ? 'active' : ''}" onclick="filterByChapter('all')">All</span>`;
+          headings.forEach((h, idx) => {
+            const hText = h.textContent.trim().replace(/^#+\s*/, '');
+            const id = h.id || ('heading-' + idx);
+            h.id = id;
+            chapHtml += `<span class="doc-tag-pill chapter-pill ${state.docSelectedChapter === id ? 'active' : ''}" onclick="filterByChapter('${id}')">${escapeHtml(hText.substring(0, 32))}</span>`;
+          });
+          chaptersList.innerHTML = chapHtml;
+        } else {
+          chaptersBar.style.display = 'none';
+        }
+      }
+
+      if (tagsList && tagsBar) {
+        const docText = state.rawMarkdown;
+        const matches = (docText.match(/#[a-zA-Z0-9_-]{2,}/g) || []).map(t => t.toLowerCase());
+        const uniqueDocTags = Array.from(new Set(matches)).filter(t => !['#ff', '#00', '#fff', '#000'].includes(t));
+        
+        if (uniqueDocTags.length > 0) {
+          tagsBar.style.display = 'flex';
+          let tagsHtml = `<span class="doc-tag-pill ${state.docSelectedTag === 'all' ? 'active' : ''}" onclick="filterByDocTag('all')">All</span>`;
+          uniqueDocTags.forEach(t => {
+            tagsHtml += `<span class="doc-tag-pill ${state.docSelectedTag === t ? 'active' : ''}" onclick="filterByDocTag('${t}')">${escapeHtml(t)}</span>`;
+          });
+          tagsList.innerHTML = tagsHtml;
+        } else {
+          tagsBar.style.display = 'none';
+        }
+      }
+    }
+
+    function filterByChapter(headingId) {
+      state.docSelectedChapter = headingId;
+      updateDocumentNavigator();
+
+      if (headingId === 'all') {
+        renderTarget.querySelectorAll('h1, h2, h3, p, ul, ol, blockquote, .code-block-wrapper, .antigravity-alert, .artifact-carousel').forEach(el => {
+          el.style.display = '';
+        });
+        if (btnResetDocFilter) btnResetDocFilter.style.display = 'none';
+        showToast('Showing all chapters');
+      } else {
+        const targetHeading = document.getElementById(headingId);
+        if (targetHeading) {
+          targetHeading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          targetHeading.style.transition = 'color 0.25s ease';
+          targetHeading.style.color = 'var(--accent)';
+          setTimeout(() => { targetHeading.style.color = ''; }, 1500);
+          if (btnResetDocFilter) btnResetDocFilter.style.display = 'inline-flex';
+          showToast(`Focused on: ${targetHeading.textContent.trim()}`);
+        }
+      }
+    }
+
+    function filterByDocTag(tag) {
+      state.docSelectedTag = tag;
+      updateDocumentNavigator();
+
+      if (tag === 'all') {
+        renderTarget.querySelectorAll('*').forEach(el => { el.style.display = ''; });
+        if (btnResetDocFilter) btnResetDocFilter.style.display = 'none';
+      } else {
+        if (btnResetDocFilter) btnResetDocFilter.style.display = 'inline-flex';
+        let matchCount = 0;
+        renderTarget.querySelectorAll('h1, h2, h3, p, li, blockquote').forEach(el => {
+          if (el.textContent.toLowerCase().includes(tag)) {
+            el.style.display = '';
+            matchCount++;
+          }
+        });
+        showToast(`Filtered by tag ${tag} (${matchCount} sections found)`);
+      }
+    }
+
+    // ==========================================
+    // Handle Text Selection for Commenting (Mobile & Desktop)
+    // ==========================================
     document.addEventListener('mouseup', handleTextSelection);
-    document.addEventListener('touchend', handleTextSelection);
+    document.addEventListener('touchend', (e) => {
+      setTimeout(() => handleTextSelection(e), 120);
+    });
 
     function handleTextSelection(e) {
-      if (e.target.closest('#comments-sidebar') || e.target.closest('.modal') || e.target.closest('#selection-comment-tooltip')) {
+      if (e && e.target && (e.target.closest('#comments-sidebar') || e.target.closest('.modal') || e.target.closest('#selection-comment-tooltip') || e.target.closest('.quick-composer-sheet'))) {
         return;
       }
 
       const selection = window.getSelection();
+      if (!selection || selection.rangeCount === 0) return;
       const selectedText = selection.toString().trim();
 
       if (selectedText && selectedText.length > 2 && renderTarget.contains(selection.anchorNode)) {
@@ -2230,17 +3608,34 @@ graph TD
         const range = selection.getRangeAt(0);
         const rect = range.getBoundingClientRect();
         
-        selectionTooltip.style.top = `${rect.top + window.scrollY - 8}px`;
-        selectionTooltip.style.left = `${rect.left + rect.width / 2}px`;
+        const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth < 768);
+        const spaceAbove = rect.top;
+
+        // Position BELOW selection on touch devices to never be hidden behind Android popups!
+        const placeBelow = isTouch || (spaceAbove < 75);
+
+        if (placeBelow) {
+          selectionTooltip.style.top = `${rect.bottom + window.scrollY + 12}px`;
+          selectionTooltip.classList.add('positioned-below');
+        } else {
+          selectionTooltip.style.top = `${rect.top + window.scrollY - 8}px`;
+          selectionTooltip.classList.remove('positioned-below');
+        }
+
+        const vw = window.innerWidth;
+        const halfWidth = 75;
+        let centerX = rect.left + rect.width / 2;
+        centerX = Math.max(halfWidth + 12, Math.min(vw - halfWidth - 12, centerX));
+        selectionTooltip.style.left = `${centerX}px`;
         selectionTooltip.style.display = 'block';
       } else {
-        if (!e.target.closest('#selection-comment-tooltip')) {
+        if (!e || !e.target || !e.target.closest('#selection-comment-tooltip')) {
           selectionTooltip.style.display = 'none';
         }
       }
     }
 
-    // Quick Composer Sheet Elements
+    // Quick Composer Sheet Elements & Tag Suggestions
     const quickComposerSheet = document.getElementById('quick-composer-sheet');
     const quickQuotePreview = document.getElementById('quick-quote-preview');
     const quickComposerInput = document.getElementById('quick-composer-input');
@@ -2249,7 +3644,20 @@ graph TD
     const btnCloseQuickComposer = document.getElementById('btn-close-quick-composer');
     const btnSidebarAddNote = document.getElementById('btn-sidebar-add-note');
 
-    // Floating Tooltip Button Click: Opens ONLY the compact composer
+    document.querySelectorAll('.composer-tag-chip').forEach(chip => {
+      chip.onclick = (e) => {
+        e.stopPropagation();
+        const tag = chip.getAttribute('data-tag');
+        if (tag) {
+          const current = quickComposerInput.value;
+          if (!current.includes(tag)) {
+            quickComposerInput.value = (current ? current + ' ' : '') + tag + ' ';
+          }
+          quickComposerInput.focus();
+        }
+      };
+    });
+
     document.getElementById('btn-tooltip-add-comment').onclick = () => {
       selectionTooltip.style.display = 'none';
       openQuickComposer(state.selectedQuote);
@@ -2283,7 +3691,6 @@ graph TD
       };
     }
 
-    // Submit new comment from quick composer
     btnSaveQuickComment.onclick = addQuickComment;
     quickComposerInput.addEventListener('keydown', (e) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
@@ -2303,7 +3710,7 @@ graph TD
       let sectionName = 'Overview';
       try {
         const selection = window.getSelection();
-        if (selection.anchorNode) {
+        if (selection && selection.anchorNode) {
           let prev = selection.anchorNode.parentElement;
           while (prev) {
             if (['H1', 'H2', 'H3', 'H4'].includes(prev.tagName)) {
@@ -2321,10 +3728,13 @@ graph TD
         sectionName = 'General';
       }
 
+      const tags = (text.match(/#[a-zA-Z0-9_-]+/g) || []).map(t => t.toLowerCase());
+
       const newComment = {
         id: 'c_' + Date.now(),
         quote: quote,
         text: text,
+        tags: Array.from(new Set(tags)),
         section: sectionName,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
         resolved: false
@@ -2339,40 +3749,102 @@ graph TD
       showToast(`Comment #${state.comments.length} added & highlighted`);
     }
 
-    // Render comments list
-    function renderCommentsList() {
-      const count = state.comments.length;
-      headerCommentCount.textContent = count;
-      sidebarCommentCount.textContent = count;
-      mobileCommentCount.textContent = count;
+    // ==========================================
+    // Render Comments List with Search & Tag Filter
+    // ==========================================
+    const commentSearchInput = document.getElementById('comment-search-input');
+    if (commentSearchInput) {
+      commentSearchInput.oninput = (e) => {
+        state.commentSearchQuery = e.target.value.trim();
+        renderCommentsList();
+      };
+    }
 
-      if (count === 0) {
+    function renderCommentsList() {
+      const totalCount = state.comments.length;
+      headerCommentCount.textContent = totalCount;
+      sidebarCommentCount.textContent = totalCount;
+      mobileCommentCount.textContent = totalCount;
+
+      const tagCounts = {};
+      state.comments.forEach(c => {
+        (c.tags || []).forEach(tag => {
+          tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+        });
+      });
+
+      const filterBar = document.getElementById('comment-tags-filter-bar');
+      if (filterBar) {
+        const tags = Object.keys(tagCounts);
+        if (tags.length === 0) {
+          filterBar.innerHTML = `<span style="font-size:0.75rem; color:var(--text-subtle);">Tip: type #tags (e.g. #todo, #bug) in comments</span>`;
+        } else {
+          let pillsHtml = `<span class="doc-tag-pill ${state.commentTagFilter === 'all' ? 'active' : ''}" onclick="setCommentTagFilter('all')">All (${totalCount})</span>`;
+          tags.forEach(tag => {
+            pillsHtml += `<span class="doc-tag-pill ${state.commentTagFilter === tag ? 'active' : ''}" onclick="setCommentTagFilter('${tag}')">${escapeHtml(tag)} (${tagCounts[tag]})</span>`;
+          });
+          filterBar.innerHTML = pillsHtml;
+        }
+      }
+
+      const query = (state.commentSearchQuery || '').toLowerCase();
+      const filtered = state.comments.filter(c => {
+        if (state.commentTagFilter !== 'all') {
+          if (!c.tags || !c.tags.includes(state.commentTagFilter)) return false;
+        }
+        if (query) {
+          const matchText = (c.text || '').toLowerCase().includes(query);
+          const matchQuote = (c.quote || '').toLowerCase().includes(query);
+          const matchSection = (c.section || '').toLowerCase().includes(query);
+          if (!matchText && !matchQuote && !matchSection) return false;
+        }
+        return true;
+      });
+
+      const exportCountAll = document.getElementById('export-count-all');
+      const exportCountFiltered = document.getElementById('export-count-filtered');
+      if (exportCountAll) exportCountAll.textContent = totalCount;
+      if (exportCountFiltered) exportCountFiltered.textContent = filtered.length;
+
+      if (filtered.length === 0) {
         commentsList.innerHTML = `
         <div class="empty-comments">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          <p><strong>No comments yet</strong></p>
-          <p style="font-size:0.8rem;">Highlight any text in the document above to attach a note or AI review instruction.</p>
+          <p><strong>${totalCount === 0 ? 'No comments yet' : 'No matching comments'}</strong></p>
+          <p style="font-size:0.8rem;">${totalCount === 0 ? 'Highlight any text in document to attach notes.' : 'Try changing your search or tag filter.'}</p>
         </div>`;
         return;
       }
 
-      commentsList.innerHTML = state.comments.map((c, index) => `
+      commentsList.innerHTML = filtered.map((c, index) => `
         <div class="comment-card ${state.activeCommentId === c.id ? 'active' : ''}" id="card-${c.id}" onclick="focusComment('${c.id}')">
           <div class="comment-card-meta">
             <span class="comment-author">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              Reviewer #${index + 1}
+              Note #${index + 1}
             </span>
             <span>${c.timestamp}</span>
           </div>
-          ${c.quote ? `<div class="comment-card-quote">"${escapeHtml(c.quote)}"</div>` : ''}
+          ${c.quote ? `<div class="comment-card-quote">“${escapeHtml(c.quote)}”</div>` : ''}
           <div class="comment-body">${escapeHtml(c.text)}</div>
+          ${(c.tags && c.tags.length > 0) ? `
+            <div style="margin-top:6px;">
+              ${c.tags.map(t => `<span class="comment-tag-badge">${escapeHtml(t)}</span>`).join('')}
+            </div>` : ''}
           <div class="comment-card-actions">
             <span style="font-size:0.72rem; color:var(--text-subtle); margin-right:auto;">📌 ${escapeHtml(c.section || 'General')}</span>
             <button class="comment-action-btn delete" onclick="deleteComment('${c.id}', event)">Delete</button>
           </div>
         </div>
       `).join('');
+    }
+
+    function setCommentTagFilter(tag) {
+      state.commentTagFilter = tag;
+      renderCommentsList();
+      if (document.getElementById('export-modal').classList.contains('active')) {
+        renderExportPreview(state.currentExportType);
+      }
     }
 
     function focusComment(id) {
@@ -2477,6 +3949,24 @@ graph TD
     document.getElementById('m-btn-export').onclick = openExportDialog;
     document.getElementById('btn-close-export-modal').onclick = () => closeModal('export-modal');
 
+    const btnScopeAll = document.getElementById('btn-export-scope-all');
+    const btnScopeFiltered = document.getElementById('btn-export-scope-filtered');
+
+    if (btnScopeAll && btnScopeFiltered) {
+      btnScopeAll.onclick = () => {
+        state.exportScope = 'all';
+        btnScopeAll.classList.add('active');
+        btnScopeFiltered.classList.remove('active');
+        renderExportPreview(state.currentExportType);
+      };
+      btnScopeFiltered.onclick = () => {
+        state.exportScope = 'filtered';
+        btnScopeFiltered.classList.add('active');
+        btnScopeAll.classList.remove('active');
+        renderExportPreview(state.currentExportType);
+      };
+    }
+
     function openExportDialog() {
       openModal('export-modal');
       renderExportPreview(state.currentExportType);
@@ -2492,16 +3982,27 @@ graph TD
     });
 
     function generateTokenSaverExport() {
-      if (state.comments.length === 0) {
-        return `# Feedback on ${state.docTitle}\n\n*No comments added yet. Highlight document text to add notes.*`;
+      let list = state.comments;
+      if (state.exportScope === 'filtered') {
+        const query = (state.commentSearchQuery || '').toLowerCase();
+        list = state.comments.filter(c => {
+          if (state.commentTagFilter !== 'all' && (!c.tags || !c.tags.includes(state.commentTagFilter))) return false;
+          if (query && !((c.text || '').toLowerCase().includes(query) || (c.quote || '').toLowerCase().includes(query))) return false;
+          return true;
+        });
+      }
+
+      if (list.length === 0) {
+        return `# Feedback on ${state.docTitle}\n\n*No comments recorded for selected filter. Total comments in doc: ${state.comments.length}*`;
       }
 
       let output = `# Review Feedback & Actions: ${state.docTitle}\n\n`;
       output += `> Instructions: Please review the following specific excerpts and apply the requested modifications.\n\n`;
 
-      state.comments.forEach((c, i) => {
-        output += `### Item ${i + 1} (Section: ${c.section || 'General'})\n`;
-        output += `> **Quote:** "${c.quote}"\n\n`;
+      list.forEach((c, i) => {
+        const tagStr = (c.tags && c.tags.length) ? ` | Tags: ${c.tags.join(', ')}` : '';
+        output += `### Item ${i + 1} (Section: ${c.section || 'General'}${tagStr})\n`;
+        output += `> **Quote:** “${c.quote}”\n\n`;
         output += `- **Comment/Action:** ${c.text}\n\n`;
         output += `---\n\n`;
       });
@@ -2517,7 +4018,8 @@ graph TD
         output += `*No comments recorded.*\n`;
       } else {
         state.comments.forEach((c, i) => {
-          output += `### ${i + 1}. [${c.section || 'General'}] Quote: "${c.quote}"\n`;
+          const tagStr = (c.tags && c.tags.length) ? ` [${c.tags.join(', ')}]` : '';
+          output += `### ${i + 1}. [${c.section || 'General'}] Quote: "${c.quote}"${tagStr}\n`;
           output += `**Feedback:** ${c.text}\n\n`;
         });
       }
@@ -2590,34 +4092,77 @@ graph TD
       showToast(`Downloaded: ${filename}`);
     };
 
-    // File Input Handling
+    // File Input Handling (Single & Multiple Files as Chapters)
     const fileInput = document.getElementById('file-input');
     document.getElementById('btn-open-file').onclick = () => fileInput.click();
     document.getElementById('m-btn-open').onclick = () => fileInput.click();
 
     fileInput.onchange = (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+      const files = Array.from(e.target.files);
+      if (files.length === 0) return;
 
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        state.comments = [];
-        renderDocument(event.target.result);
-        renderCommentsList();
-        showToast(`Loaded ${file.name}`);
-      };
-      reader.readAsText(file);
+      if (files.length === 1) {
+        const file = files[0];
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const content = event.target.result;
+          if (state.rawMarkdown.trim().length > 0) {
+            if (confirm(`A document is currently loaded.\n\nClick "OK" to append "${file.name}" as a new chapter,\nor "Cancel" to open it as a new document.`)) {
+              appendChapterToDocument(file.name.replace(/\.(md|markdown|txt)$/i, ''), content);
+              return;
+            }
+          }
+          state.comments = [];
+          renderDocument(content);
+          renderCommentsList();
+          showToast(`Loaded ${file.name}`);
+        };
+        reader.readAsText(file);
+      } else {
+        let loadedFiles = [];
+        let readCount = 0;
+        files.forEach((file, index) => {
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            loadedFiles[index] = { name: file.name, content: ev.target.result };
+            readCount++;
+            if (readCount === files.length) {
+              let combinedMd = '';
+              loadedFiles.forEach((item, idx) => {
+                if (idx > 0) combinedMd += '\n\n---\n\n';
+                const chapterTitle = item.name.replace(/\.(md|markdown|txt)$/i, '');
+                if (!item.content.trim().startsWith('# ')) {
+                  combinedMd += `# ${chapterTitle}\n\n`;
+                }
+                combinedMd += item.content.trim() + '\n';
+              });
+              state.comments = [];
+              renderDocument(combinedMd);
+              renderCommentsList();
+              showToast(`Loaded ${files.length} chapters!`);
+            }
+          };
+          reader.readAsText(file);
+        });
+      }
+      fileInput.value = '';
     };
 
     // Raw Markdown Editor Modal
     const rawInput = document.getElementById('raw-markdown-input');
 
     document.getElementById('btn-raw-editor').onclick = () => {
-      rawInput.value = state.rawMarkdown;
+      rawInput.value = '';
       openModal('raw-editor-modal');
+      setTimeout(() => rawInput.focus(), 50);
     };
 
     document.getElementById('btn-close-raw-modal').onclick = () => closeModal('raw-editor-modal');
+
+    document.getElementById('btn-load-current-doc').onclick = () => {
+      rawInput.value = state.rawMarkdown || '';
+      showToast('Loaded current document into editor');
+    };
 
     document.getElementById('btn-apply-raw-markdown').onclick = () => {
       const newMd = rawInput.value;
@@ -2637,7 +4182,7 @@ graph TD
     document.getElementById('m-btn-toc').onclick = () => openModal('mobile-toc-modal');
     document.getElementById('btn-close-mobile-toc').onclick = () => closeModal('mobile-toc-modal');
 
-    // Theme Management (Light & Dark Mode)
+    // Theme Management (Supports Dark, Light, Sepia, Midnight)
     const hljsTheme = document.getElementById('hljs-theme');
     const metaThemeColor = document.getElementById('meta-theme-color');
 
@@ -2648,9 +4193,13 @@ graph TD
         localStorage.setItem('antigravity_theme', theme);
       } catch (e) {}
 
-      const isDark = theme === 'dark';
+      const isDark = (theme === 'dark' || theme === 'midnight');
       if (metaThemeColor) {
-        metaThemeColor.setAttribute('content', isDark ? '#0a0d12' : '#f8fafc');
+        let barColor = '#0a0d12';
+        if (theme === 'light') barColor = '#f8fafc';
+        else if (theme === 'sepia') barColor = '#f5eedc';
+        else if (theme === 'midnight') barColor = '#000000';
+        metaThemeColor.setAttribute('content', barColor);
       }
 
       document.querySelectorAll('.icon-theme-sun').forEach(el => {
@@ -2672,7 +4221,9 @@ graph TD
     document.querySelectorAll('.btn-theme-toggle').forEach(btn => {
       btn.onclick = () => {
         const nextTheme = state.theme === 'dark' ? 'light' : 'dark';
-        applyTheme(nextTheme);
+        formatting.theme = nextTheme;
+        saveFormattingSettings();
+        applyFormattingSettings(formatting);
       };
     });
 
@@ -2702,15 +4253,16 @@ graph TD
 
     document.getElementById('m-menu-paste-edit').onclick = () => {
       closeMobileMenu();
-      rawInput.value = state.rawMarkdown;
+      rawInput.value = '';
       openModal('raw-editor-modal');
+      setTimeout(() => rawInput.focus(), 50);
     };
 
     document.getElementById('m-menu-load-sample').onclick = () => {
       closeMobileMenu();
       const sample = document.getElementById('sample-artifact-content').textContent.trim();
       renderDocument(sample);
-      showToast('Loaded Antigravity Demo Artifact');
+      showToast('Loaded Demo Sample Artifact');
     };
 
     // PWA Service Worker & Install Prompt Handling
@@ -2732,7 +4284,7 @@ graph TD
         deferredInstallPrompt.prompt();
         deferredInstallPrompt.userChoice.then((choiceResult) => {
           if (choiceResult.outcome === 'accepted') {
-            showToast('Installing Artifact AI App...');
+            showToast('Installing Artifacts AI App...');
           }
           deferredInstallPrompt = null;
           if (btnInstallDesktop) btnInstallDesktop.style.display = 'none';
@@ -2835,13 +4387,13 @@ graph TD
 
     function saveCommentsToStorage() {
       try {
-        localStorage.setItem('antigravity_comments_' + state.docTitle, JSON.stringify(state.comments));
+        localStorage.setItem('artifacts_ai_comments_' + state.docTitle, JSON.stringify(state.comments));
       } catch (e) {}
     }
 
     function loadCommentsFromStorage() {
       try {
-        const saved = localStorage.getItem('antigravity_comments_' + state.docTitle);
+        const saved = localStorage.getItem('artifacts_ai_comments_' + state.docTitle) || localStorage.getItem('antigravity_comments_' + state.docTitle);
         if (saved) {
           state.comments = JSON.parse(saved);
         }
@@ -2852,11 +4404,7 @@ graph TD
 
     // App Initialization
     window.addEventListener('DOMContentLoaded', () => {
-      let savedTheme = 'dark';
-      try {
-        savedTheme = localStorage.getItem('antigravity_theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
-      } catch (e) {}
-      applyTheme(savedTheme);
+      loadFormattingSettings();
 
       const sampleContent = document.getElementById('sample-artifact-content').textContent.trim();
       loadCommentsFromStorage();

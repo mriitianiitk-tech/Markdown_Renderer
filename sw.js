@@ -1,4 +1,4 @@
-const CACHE_NAME = 'antigravity-artifacts-v1.1';
+const CACHE_NAME = 'artifacts-ai-v2.0';
 
 const APP_SHELL = [
   './',
